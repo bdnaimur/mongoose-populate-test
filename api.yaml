@@ -1,0 +1,361 @@
+openapi: 3.0.0
+info:
+  title: Api documentation with swagger
+  description: Test API doc.
+  version: 1.0.0
+servers: 
+  - url: http://localhost:4500/v1
+    description: Local Server
+tags: 
+  - name: User
+    description: All User Routes
+  - name: Comment
+    description: All Comment Routes
+  - name: Blog
+    description: All Blog Routes
+paths:
+  /users/add:
+    post:
+      tags:
+        - User
+      description: Admin can add bank that he own.
+      summary: Admin Route
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+      responses:
+        201:
+          description: Bank added successfully
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: OK
+  /users/update/{id}:
+    patch:
+      tags:
+        - User
+      description: Pass only those key value that you want to edit
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          # schema:
+          #   type: string
+          #   format: uuid
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_name:
+                    type: string
+      responses:
+        default:
+          description: OK
+  /users/changeStatus/{id}:
+    patch:
+      tags:
+        - User
+      description: Pass active or inactive to change status of bank
+      summary: Admin Route
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          schema:
+            type: string
+        - in: query
+          name: status
+          required: true
+          description: bank status
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+      responses:
+        default:
+          description: OK
+  /users/delete/{id}:
+    delete:
+      tags:
+        - User
+      description: Delete bank with bank id
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: bank id
+          # schema:
+          #   type: string
+            # format: uuid
+      responses:
+        default:
+          description: OK
+  /users:
+    get:
+      tags:
+        - User
+      summary: Only admin
+      description: Get all Banks
+      responses: 
+        200:
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                type: string
+        default: 
+          description: ok
+  # Comment
+  /comments/add:
+    post:
+      tags:
+        - Comment
+      description: Admin can add bank that he own.
+      summary: Admin Route
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+      responses:
+        201:
+          description: Bank added successfully
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: OK
+  /comments/update/{id}:
+    patch:
+      tags:
+        - Comment
+      description: Pass only those key value that you want to edit
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          # schema:
+          #   type: string
+          #   format: uuid
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_name:
+                    type: string
+      responses:
+        default:
+          description: OK
+  /comments/changeStatus/{id}:
+    patch:
+      tags:
+        - Comment
+      description: Pass active or inactive to change status of bank
+      summary: Admin Route
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          schema:
+            type: string
+        - in: query
+          name: status
+          required: true
+          description: bank status
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+      responses:
+        default:
+          description: OK
+  /comments/delete/{id}:
+    delete:
+      tags:
+        - Comment
+      description: Delete bank with bank id
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: bank id
+          # schema:
+          #   type: string
+            # format: uuid
+      responses:
+        default:
+          description: OK
+  /comments:
+    get:
+      tags:
+        - Comment
+      summary: Only admin
+      description: Get all Banks
+      responses: 
+        200:
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                type: string
+        default: 
+          description: ok
+  # Blog
+  /blogs/add:
+    post:
+      tags:
+        - Blog
+      description: Admin can add bank that he own.
+      summary: Admin Route
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                body:
+                  type: string
+      responses:
+        201:
+          description: Bank added successfully
+          content:
+            application/json:
+              schema:
+                type: string
+        default:
+          description: OK
+  /blogs/update/{id}:
+    patch:
+      tags:
+        - Blog
+      description: Pass only those key value that you want to edit
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          # schema:
+          #   type: string
+          #   format: uuid
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  account_name:
+                    type: string
+      responses:
+        default:
+          description: OK
+  /blogs/changeStatus/{id}:
+    patch:
+      tags:
+        - Blog
+      description: Pass active or inactive to change status of bank
+      summary: Admin Route
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: banks id
+          schema:
+            type: string
+        - in: query
+          name: status
+          required: true
+          description: bank status
+          schema:
+            type: string
+            enum:
+              - active
+              - inactive
+      responses:
+        default:
+          description: OK
+  /blogs/delete/{id}:
+    delete:
+      tags:
+        - Blog
+      description: Delete bank with bank id
+      summary: Admin Route
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: bank id
+          # schema:
+          #   type: string
+            # format: uuid
+      responses:
+        default:
+          description: OK
+  /blogs:
+    get:
+      tags:
+        - Blog
+      summary: Only admin
+      description: Get all Banks
+      responses: 
+        200:
+          description: Successfull
+          content:
+            application/json:
+              schema:
+                type: string
+        default: 
+          description: ok
